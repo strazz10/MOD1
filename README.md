@@ -14,7 +14,7 @@ run_all_ising.sh esegue la simulazione e analizza i dati per ising 2d (su linux)
 
 metropolis.f90 genera numeri gaussiani con algoritmo metropolis
 
-metropolis_plot.py plotta i risultati e li confronta con una gaussiana normalizzata
+plotter_metro.py plotta i risultati e li confronta con una gaussiana normalizzata
 
 run_all_metro.sh genera numeri gaussiani, li analizza e li plotta (su linux)
 
