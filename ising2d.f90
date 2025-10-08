@@ -1,7 +1,7 @@
 program ising2d
 implicit none 
 
-integer, parameter :: L = 4, N = 10**6   !!lunghezza reticolo, numero di campionamenti
+integer, parameter :: L = 4, N = 10**8   !!lunghezza reticolo, numero di campionamenti
 integer :: i, j, x, y, xtemp, ytemp, lattice(L,L), iteration, metropolis_ising, temp, s
 real :: beta	          !!temperatura inversa
 real :: aux, acceptance, r

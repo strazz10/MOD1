@@ -4,12 +4,12 @@ import matplotlib.pyplot as plt
 filename = 'ising.dat'       ##analisi dati per ising 2d
 data = np.loadtxt(filename, comments='#')
 
-en = data[1000:, 0]
-magn = data[1000:, 1]
+en = data[:, 0]
+magn = data[:, 1]
 magn = abs(magn)
 n = len(en)
 
-k = 1      ##parametro blocking, n divisibile per k
+k = 10**3    ##parametro blocking stimato da altro script, n divisibile per k
 
 def square(x):
 	return x**2
@@ -23,11 +23,20 @@ mean_magn_matrix = np.reshape(magn, (int(n/k), k))
 mean_en = np.sum(en)/n       ##valori medi e deviazioni standard 
 mean_magn = np.sum(magn)/n
 
-var_en = (k/(n-k))*np.sum((np.sum(mean_en_matrix/k, axis=1).tolist()-mean_en)**2)
-var_magn = (k/(n-k))*np.sum((np.sum(mean_magn_matrix/k, axis=1).tolist()-mean_magn)**2)
+mean_en_block = (k/n)*np.sum(np.sum(mean_en_matrix/k, axis=1).tolist())
+mean_magn_block = (k/n)*np.sum(np.sum(mean_magn_matrix/k, axis=1).tolist())
 
-print(f'<e> =  {mean_en}, var_e = {var_en}')
-print(f'<|m|> =  {mean_magn}, var_m = {var_magn}')
+var_en = (k/n)*(k/(n-k))*np.sum((np.sum(mean_en_matrix/k, axis=1).tolist()-mean_en_block)**2) 
+var_magn = (k/n)*(k/(n-k))*np.sum((np.sum(mean_magn_matrix/k, axis=1).tolist()-mean_magn_block)**2)
+
+fake_variance_en = (k/n)*np.sum(np.sum((mean_en_matrix**2)/k, axis=1).tolist()) - mean_en_block**2
+fake_variance_magn = (k/n)*np.sum(np.sum((mean_magn_matrix**2)/k, axis=1).tolist()) - mean_magn_block**2
+
+print('')
+print(f'<e> =  {mean_en_block}, var_e = {var_en}, sigma_e = {np.sqrt(var_en)}')
+print(f'<|m|> =  {mean_magn_block}, var_m = {var_magn}, sigma_m = {np.sqrt(var_magn)}')
+print(f'<e^2>-<e>^2 =  {fake_variance_en}')
+print(f'<m^2>-<m>^2 =  {fake_variance_magn}')
 
 mean_magnsquare = np.sum(square(magn))/n 
 mean_magnsquare_matrix = np.reshape(square(magn), (int(n/k), k))
@@ -36,6 +45,8 @@ print(f'<m^2> =  {mean_magnsquare}')
 mean_magnfourth = np.sum(power4(magn))/n
 mean_quartic = mean_magnfourth/(mean_magnsquare**2) 
 print(f'<m^4>/<m^2>^2 =  {mean_quartic}')
+print(f'blocking parameter k = {k}')
+print('')
 
 def bootstrap_quartic():
 	R = 200            ##bootstrap per la varianza m^4/m^2^2
