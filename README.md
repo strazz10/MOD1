@@ -4,7 +4,7 @@ Modulo 1 Metodi Numerici
 
 Tutti i codici fanno schifo e sono da ottimizzare
 
-ising2d.f90 fa una misura a beta fissato
+ising2d.f90 fa una misura a beta fissato sul modello di ising 2d 
 
 analisi_ising.py fa un'analisi preliminare dei dati simulati e calcola varie cose 
 
