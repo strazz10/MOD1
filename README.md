@@ -18,5 +18,5 @@ plotter_metro.py plotta i risultati e li confronta con una gaussiana normalizzat
 
 run_all_metro.sh genera numeri gaussiani, li analizza e li plotta (su linux)
 
-senza i file .sh dovrebbero funzionare senza problemi ovunque
+ising_non_square.f90 è una bozza per ising su reticolo esagonale
 
