@@ -137,7 +137,7 @@ enddo
 E = dble(temp)/dble(rows*columns)
 end function totalE
 
-function totalMagn(lattice, rows, columns, norm) result(m)  !!definita a meno di un fattore norm/rows*columns a moltiplicare m in uscita
+function totalMagn(lattice, rows, columns, norm) result(m)  !!definita a meno di un fattore norm/rows*columns a moltiplicare m in uscita, possibilmente sbagliata
 implicit none
 double precision :: m
 integer :: i, j, rows, columns, lattice(rows,columns), temp, norm
