@@ -10,13 +10,10 @@ analisi_ising.py fa un'analisi preliminare dei dati simulati e calcola varie cos
 
 ising_blocking.py mostra l'andamento dell'errore con il blocking e permette di fissare il parametro
 
-run_all_ising.sh esegue la simulazione e analizza i dati per ising 2d (su linux)
-
 metropolis.f90 genera numeri gaussiani con algoritmo metropolis
 
 plotter_metro.py plotta i risultati e li confronta con una gaussiana normalizzata
 
-run_all_metro.sh genera numeri gaussiani, li analizza e li plotta (su linux)
-
 ising_non_square.f90 è una bozza per ising su reticolo esagonale
 
+le script shell e il resto dei file servono a automatizzare il tutto
