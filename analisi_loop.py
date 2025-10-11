@@ -51,6 +51,46 @@ sigma_m0 = np.sqrt(est_var_magn0)
 C = volume*variance_en      #calore spec
 chi = volume*(k/n)*np.sum(np.sum((mean_magn_matrix**2)/k, axis=1).tolist())     #suscettività
 chi2 = volume*variance_magn
-#fare bootstrap per le sigma rimanenti
 
-print(beta, mean_en_block, sigma_e, np.sum(magn)/n, sigma_m0, mean_magn_block, sigma_m, C)
+##funzioni bootstrap varie
+	
+
+R = 400          
+w = 20  
+iterations = 5*10**4           
+i = 0
+sigma_C0 = np.empty(R)
+sigma_chi20 = np.empty(R)
+while i<R:
+	s1 = 0 #per il calore specifico
+	s2 = 0
+	k1 = 0 #per la suscettività2
+	k2 = 0
+	j = 0
+	while j<iterations:
+		myrand = np.random.randint(1, n)
+		x_j = en[myrand]
+		y_j = magn[myrand]
+		s1 = s1 + square(x_j)
+		s2 = s2 + x_j
+		k1 = k1 + square(y_j)
+		k2 = k2 + y_j
+		j = j+1
+	s1 = s1/n
+	s2 = s2/n
+	s2 = s2**2
+	k1 = k1/n
+	k2 = k2/n
+	k2 = k2**2
+	sigma_C0[i] = volume*(s1-s2)
+	sigma_chi20[i] = volume*(k1-k2)
+	i = i+1
+
+mean_sigmaC_matrix = np.reshape(sigma_C0, (int(R/w), w))
+mean_sigmaChi2_matrix = np.reshape(sigma_chi20, (int(R/w), w))
+mean_sigmaC_block = (w/n)*np.sum(np.sum(mean_sigmaC_matrix/w, axis=1).tolist())
+mean_sigmaChi2_block = (w/n)*np.sum(np.sum(mean_sigmaChi2_matrix/w, axis=1).tolist())
+sigma_C = np.sqrt((w/(n-w))*(np.sum(np.sum((mean_sigmaC_matrix**2)/w, axis=1).tolist())-(1/R)*mean_sigmaC_block**2))
+sigma_chi2 = np.sqrt((w/(n-w))*(np.sum(np.sum((mean_sigmaChi2_matrix**2)/w, axis=1).tolist())-(1/R)*mean_sigmaChi2_block**2))
+
+print(beta, mean_en_block, sigma_e, np.sum(magn)/n, sigma_m0, mean_magn_block, sigma_m, C, sigma_C, chi2, sigma_chi2)
