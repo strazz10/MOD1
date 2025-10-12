@@ -4,7 +4,7 @@ import glob
 from matplotlib.gridspec import GridSpec
 
 # ---------- Configuration ----------
-data_dir = "/home/strazz/Magistrale/NumMeth/MOD1/NonSquare/Measurements/"  # folder containing your dat files
+data_dir = "/yourpath/"  # folder containing your dat files
 file_pattern = "*.dat"  
 num_plots = 5
 
