@@ -32,28 +32,38 @@ for index,filename in enumerate(files):
         colors = ['b', 'g', 'r', 'c', 'm', 'y', 'k', '#ff7f0e', '#2ca02c', '#1f77b4']
         markers = ['o', 's', '^', 'v', 'D', 'x', '+', '*', 'p', 'h']
         
-        for i in range(num_plots):
+        for i in range(num_plots-1):
             y = data[:, 1 + i * 2]
             yerr = data[:, 2 + i * 2]
             axs[i].errorbar(
-                x, y,
+                x, y, yerr,
                 marker=markers[(np.random.randint(0, len(markers)))],
                 color=colors[(np.random.randint(0, len(colors)))],
                 ls='none',
                 label= f'L={label[index]}'  
             )
+            
+            axs[5].plot(
+                x, y = data[:, 9],
+                marker=markers[(np.random.randint(0, len(markers)))],
+                color=colors[(np.random.randint(0, len(colors)))],
+                label= f'L={label[index]}'
+            )
+            
     except Exception as e:
         print(f"Error reading {filename}: {e}")
+        
+
 
 # ---------- Custom axis labels ----------
 xlabels = [r"$\beta$"]
 
 ylabels = [
     "<e>",
-    "<m>",
     "<|m|>",
     "C",
-    "$\chi$"
+    "$\chi$",
+    "U"
 ]
 
 for i, ax in enumerate(axs):
