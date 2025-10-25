@@ -1,7 +1,0 @@
-ISTRUZIONI PER FARE L'ANALISI
-
-1 per diversi L, genero una serie di file .txt a vari beta tramite ising_non_square.sh (che posso modificare per avere reticolo quadrato)
-
-2 faccio l'analisi su tutti i beta con analisi_loop.sh e ottengo un file .dat
-
-3 ripeto per diversi L e analizzo tutto con looper_plotter.py
