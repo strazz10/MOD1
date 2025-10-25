@@ -1,7 +1,6 @@
 # MOD1
 Modulo 1 Metodi Numerici
 
+il file .sh looppa clock.f90 e fa misure a vari beta, a L fissato
 
-Tutti i codici fanno schifo e sono da ottimizzare
-
-Vari codici per fare generazione e analisi dati con metodi montecarlo
+gli script python servono per analisi e plot
